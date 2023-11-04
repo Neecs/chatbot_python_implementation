@@ -1,4 +1,5 @@
 from nltk.chat.util import Chat, reflections
+from tkinter import *
 
 # responses are matched top to bottom, so non-specific matches occur later
 # for each match, a list of possible responses is provided
@@ -267,7 +268,16 @@ responses = (
     ),
 )
 
+
+def sendMessage():
+    message = inputMessage.get()
+    textArea.insert(END, message + '\n')
+    response = zen_chatbot.respond(message)
+    textArea.insert(END, "Zen Chatbot: " + response + '\n')
+
+
 zen_chatbot = Chat(responses, reflections)
+
 
 def zen_chat():
     print("*" * 75)
@@ -279,12 +289,37 @@ def zen_chat():
     print("*" * 75)
     print("Welcome, my child.")
 
-    zen_chatbot.converse()
 
 def demo():
     zen_chat()
 
 
-
 if __name__ == "__main__":
     demo()
+
+window = Tk()
+window.title("zen chatbot")
+window.geometry("450x330")
+window.resizable(0, 0)
+window.config(bg="white")
+
+principalWindow = Frame()
+title = Label(principalWindow, text="Welcome to zen chatbot\nSay Hello to the chatbot")
+title.config(font=("Courier", 18))
+title.grid(row=0, column=0, padx=10, pady=10)
+
+textArea = Text(principalWindow, width=50, height=10)
+textArea.grid(row=1, column=0, padx=10, pady=10)
+scroll = Scrollbar(principalWindow, command=textArea.yview())
+scroll.grid(row=1, column=1, sticky="nsew")
+textArea.config(yscrollcommand=scroll.set)
+textArea.insert(END, "Zen Chatbot: " + "Welcome, my child." + "\n")
+
+inputMessage = Entry(principalWindow, width=67)
+inputMessage.grid(row=2, column=0)
+
+send = Button(principalWindow, text="Enviar Mensaje", width=20, command=sendMessage)
+send.grid(row=3, column=0, padx=10, pady=10)
+
+principalWindow.pack()
+window.mainloop()

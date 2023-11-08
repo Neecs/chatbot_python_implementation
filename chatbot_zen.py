@@ -38,8 +38,8 @@ responses = (
         r"i want (.*)",
         (
             "Desires of the heart will distract you from the path to enlightenment.",
-            "Will%1 help you attain enlightenment?",
-            "Is%1 a desire of the mind, or of the heart?",
+            "Will %1 help you attain enlightenment?",
+            "Is %1 a desire of the mind, or of the heart?",
         ),
     ),
     # why questions are separated into three types:
@@ -51,24 +51,24 @@ responses = (
     #     chatbot: "Are you sure I tell you?"
     # - this style works for positives (e.g. "why do you like cake?")
     #   but does not work for negatives (e.g. "why don't you like cake?")
-    (r"why (.*) i (.*)\?", ("You%1%2?", "Perhaps you only think you%1%2")),
-    (r"why (.*) you(.*)\?", ("Why%1 you%2?", "%2 I%1", "Are you sure I%2?")),
-    (r"why (.*)\?", ("I cannot tell you why%1.", "Why do you think %1?")),
+    (r"why (.*) i (.*)\?", ("You %1 %2?", "Perhaps you only think you %1 %2")),
+    (r"why (.*) you(.*)\?", ("Why %1 you %2?", "%2 I %1", "Are you sure I %2?")),
+    (r"why (.*)\?", ("I cannot tell you why %1.", "Why do you think %1?")),
     # e.g. "are you listening?", "are you a duck"
     (
         r"are you (.*)\?",
-        ("Maybe%1, maybe not%1.", "Whether I am%1 or not is God's business."),
+        ("Maybe %1, maybe not %1.", "Whether I am %1 or not is God's business."),
     ),
     # e.g. "am I a duck?", "am I going to die?"
     (
         r"am i (.*)\?",
-        ("Perhaps%1, perhaps not%1.", "Whether you are%1 or not is not for me to say."),
+        ("Perhaps %1, perhaps not %1.", "Whether you are %1 or not is not for me to say."),
     ),
     # what questions, e.g. "what time is it?"
     # problems:
     #     person:  "What do you want?"
     #    chatbot: "Seek truth, not what do me want."
-    (r"what (.*)\?", ("Seek truth, not what%1.", "What%1 should not concern you.")),
+    (r"what (.*)\?", ("Seek truth, not what %1.", "What%1 should not concern you.")),
     # how questions, e.g. "how do you do?"
     (
         r"how (.*)\?",
@@ -91,7 +91,7 @@ responses = (
     (
         r"can i (.*)\?",
         (
-            "You can%1 if you believe you can%1, and have a pure spirit.",
+            "You can %1 if you believe you can %1, and have a pure spirit.",
             "Seek truth and you will know if you can%1.",
         ),
     ),
@@ -99,14 +99,14 @@ responses = (
     (
         r"it is (.*)",
         (
-            "How can you be certain that%1, when you do not even know yourself?",
-            "Whether it is%1 or not does not change the way the world is.",
+            "How can you be certain that %1, when you do not even know yourself?",
+            "Whether it is %1 or not does not change the way the world is.",
         ),
     ),
     # e.g. "is there a doctor in the house?"
     (
         r"is there (.*)\?",
-        ("There is%1 if you believe there is.", "It is possible that there is%1."),
+        ("There is %1 if you believe there is.", "It is possible that there is%1."),
     ),
     # e.g. "is it possible?", "is this true?"
     (r"is(.*)\?", ("%1 is not relevant.", "Does this matter?")),
@@ -159,7 +159,7 @@ responses = (
         (
             "What we can and can't do is a limitation of the mind.",
             "There are limitations of the body, and limitations of the mind.",
-            "Have you tried to%1 with a clear mind?",
+            "Have you tried to %1 with a clear mind?",
         ),
     ),
     # "I think.." indicates uncertainty. e.g. "I think so."
@@ -170,7 +170,7 @@ responses = (
         (
             "Uncertainty in an uncertain world.",
             "Indeed, how can we be certain of anything in such uncertain times.",
-            "Are you not, in fact, certain that%1?",
+            "Are you not, in fact, certain that %1?",
         ),
     ),
     # "I feel...emotions/sick/light-headed..."
@@ -179,7 +179,7 @@ responses = (
         (
             "Your body and your emotions are both symptoms of your mind."
             "What do you believe is the root of such feelings?",
-            "Feeling%1 can be a sign of your state-of-mind.",
+            "Feeling %1 can be a sign of your state-of-mind.",
         ),
     ),
     # exclaimation mark indicating emotion
@@ -198,7 +198,7 @@ responses = (
         (
             "Does knowning the reasons behind things help you to understand"
             " the things themselves?",
-            "If%1, what else must be true?",
+            "If %1, what else must be true?",
         ),
     ),
     # yes or no - raise an issue of certainty/correctness
@@ -299,7 +299,7 @@ if __name__ == "__main__":
 
 window = Tk()
 window.title("zen chatbot")
-window.geometry("800x700")
+window.geometry("800x680")
 window.resizable(0, 0)
 window.config(bg="white")
 

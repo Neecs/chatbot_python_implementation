@@ -299,7 +299,7 @@ if __name__ == "__main__":
 
 window = Tk()
 window.title("zen chatbot")
-window.geometry("450x330")
+window.geometry("800x700")
 window.resizable(0, 0)
 window.config(bg="white")
 
@@ -308,7 +308,7 @@ title = Label(principalWindow, text="Welcome to zen chatbot\nSay Hello to the ch
 title.config(font=("Courier", 18))
 title.grid(row=0, column=0, padx=10, pady=10)
 
-textArea = Text(principalWindow, width=50, height=10)
+textArea = Text(principalWindow, width=90, height=30)
 textArea.grid(row=1, column=0, padx=10, pady=10)
 scroll = Scrollbar(principalWindow, command=textArea.yview())
 scroll.grid(row=1, column=1, sticky="nsew")

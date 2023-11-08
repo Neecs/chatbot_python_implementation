@@ -318,7 +318,7 @@ textArea.insert(END, "Zen Chatbot: " + "Welcome, my child." + "\n")
 inputMessage = Entry(principalWindow, width=67)
 inputMessage.grid(row=2, column=0)
 
-send = Button(principalWindow, text="Enviar Mensaje", width=20, command=sendMessage)
+send = Button(principalWindow, text="Send message", width=20, command=sendMessage)
 send.grid(row=3, column=0, padx=10, pady=10)
 
 principalWindow.pack()

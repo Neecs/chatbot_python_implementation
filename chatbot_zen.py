@@ -62,7 +62,10 @@ responses = (
     # e.g. "am I a duck?", "am I going to die?"
     (
         r"am i (.*)\?",
-        ("Perhaps %1, perhaps not %1.", "Whether you are %1 or not is not for me to say."),
+        (
+            "Perhaps %1, perhaps not %1.",
+            "Whether you are %1 or not is not for me to say.",
+        ),
     ),
     # what questions, e.g. "what time is it?"
     # problems:
@@ -271,9 +274,9 @@ responses = (
 
 def sendMessage():
     message = inputMessage.get()
-    textArea.insert(END, message + '\n')
+    textArea.insert(END, message + "\n")
     response = zen_chatbot.respond(message)
-    textArea.insert(END, "Zen Chatbot: " + response + '\n')
+    textArea.insert(END, "Zen Chatbot: " + response + "\n")
 
 
 zen_chatbot = Chat(responses, reflections)

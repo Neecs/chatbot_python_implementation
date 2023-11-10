@@ -1,13 +1,7 @@
 from nltk.chat.util import Chat, reflections
 from tkinter import *
 
-# responses are matched top to bottom, so non-specific matches occur later
-# for each match, a list of possible responses is provided
 responses = (
-    # Zen Chatbot opens with the line "Welcome, my child." The usual
-    # response will be a greeting problem: 'good' matches "good morning",
-    # "good day" etc, but also "good grief!"  and other sentences starting
-    # with the word 'good' that may not be a greeting
     (
         r"(hello(.*))|(good [a-zA-Z]+)",
         (
@@ -17,15 +11,6 @@ responses = (
             "Hello. Do you seek englightenment?",
         ),
     ),
-    # "I need" and "I want" can be followed by a thing (eg 'help')
-    # or an action (eg 'to see you')
-    #
-    # This is a problem with this style of response -
-    # person:    "I need you"
-    # chatbot:    "me can be achieved by hard work and dedication of the mind"
-    # i.e. 'you' is not really a thing that can be mapped this way, so this
-    # interpretation only makes sense for some inputs
-    #
     (
         r"i need (.*)",
         (
@@ -42,15 +27,6 @@ responses = (
             "Is %1 a desire of the mind, or of the heart?",
         ),
     ),
-    # why questions are separated into three types:
-    # "why..I"     e.g. "why am I here?" "Why do I like cake?"
-    # "why..you"    e.g. "why are you here?" "Why won't you tell me?"
-    # "why..."    e.g. "Why is the sky blue?"
-    # problems:
-    #     person:  "Why can't you tell me?"
-    #     chatbot: "Are you sure I tell you?"
-    # - this style works for positives (e.g. "why do you like cake?")
-    #   but does not work for negatives (e.g. "why don't you like cake?")
     (r"why (.*) i (.*)\?", ("You %1 %2?", "Perhaps you only think you %1 %2")),
     (r"why (.*) you(.*)\?", ("Why %1 you %2?", "%2 I %1", "Are you sure I %2?")),
     (r"why (.*)\?", ("I cannot tell you why %1.", "Why do you think %1?")),
@@ -59,7 +35,6 @@ responses = (
         r"are you (.*)\?",
         ("Maybe %1, maybe not %1.", "Whether I am %1 or not is God's business."),
     ),
-    # e.g. "am I a duck?", "am I going to die?"
     (
         r"am i (.*)\?",
         (
@@ -67,12 +42,7 @@ responses = (
             "Whether you are %1 or not is not for me to say.",
         ),
     ),
-    # what questions, e.g. "what time is it?"
-    # problems:
-    #     person:  "What do you want?"
-    #    chatbot: "Seek truth, not what do me want."
     (r"what (.*)\?", ("Seek truth, not what %1.", "What%1 should not concern you.")),
-    # how questions, e.g. "how do you do?"
     (
         r"how (.*)\?",
         (
@@ -81,7 +51,6 @@ responses = (
             "Ask yourself not how, but why.",
         ),
     ),
-    # can questions, e.g. "can you run?", "can you come over here please?"
     (
         r"can you (.*)\?",
         (
@@ -90,7 +59,6 @@ responses = (
             "I can do all, and I can do nothing.",
         ),
     ),
-    # can questions, e.g. "can I have some cake?", "can I know truth?"
     (
         r"can i (.*)\?",
         (
@@ -98,7 +66,6 @@ responses = (
             "Seek truth and you will know if you can%1.",
         ),
     ),
-    # e.g. "It is raining" - implies the speaker is certain of a fact
     (
         r"it is (.*)",
         (
@@ -106,14 +73,11 @@ responses = (
             "Whether it is %1 or not does not change the way the world is.",
         ),
     ),
-    # e.g. "is there a doctor in the house?"
     (
         r"is there (.*)\?",
         ("There is %1 if you believe there is.", "It is possible that there is%1."),
     ),
-    # e.g. "is it possible?", "is this true?"
     (r"is(.*)\?", ("%1 is not relevant.", "Does this matter?")),
-    # non-specific question
     (
         r"(.*)\?",
         (
@@ -123,7 +87,6 @@ responses = (
             "The answer to your question cannot be told. It must be experienced.",
         ),
     ),
-    # expression of hate of form "I hate you" or "Kelly hates cheese"
     (
         r"(.*) (hate[s]?)|(dislike[s]?)|(don\'t like)(.*)",
         (
@@ -132,7 +95,6 @@ responses = (
             "Hate is a very strong emotion.",
         ),
     ),
-    # statement containing the word 'truth'
     (
         r"(.*) truth(.*)",
         (
@@ -141,14 +103,10 @@ responses = (
             "The search for truth is a long journey.",
         ),
     ),
-    # desire to do an action
-    # e.g. "I want to go shopping"
     (
         r"i want to (.*)",
         ("You may %1 if your heart truly desires to.", "You may have to %1."),
     ),
-    # desire for an object
-    # e.g. "I want a pony"
     (
         r"i want (.*)",
         (
@@ -156,7 +114,6 @@ responses = (
             "Is this a desire of the heart, or of the mind?",
         ),
     ),
-    # e.g. "I can't wait" or "I can't do this"
     (
         r"i can\'t (.*)",
         (
@@ -165,9 +122,6 @@ responses = (
             "Have you tried to %1 with a clear mind?",
         ),
     ),
-    # "I think.." indicates uncertainty. e.g. "I think so."
-    # problem: exceptions...
-    # e.g. "I think, therefore I am"
     (
         r"i think (.*)",
         (
@@ -176,7 +130,6 @@ responses = (
             "Are you not, in fact, certain that %1?",
         ),
     ),
-    # "I feel...emotions/sick/light-headed..."
     (
         r"i feel (.*)",
         (
@@ -185,8 +138,6 @@ responses = (
             "Feeling %1 can be a sign of your state-of-mind.",
         ),
     ),
-    # exclaimation mark indicating emotion
-    # e.g. "Wow!" or "No!"
     (
         r"(.*)!",
         (
@@ -194,8 +145,6 @@ responses = (
             "You need to calm your emotions.",
         ),
     ),
-    # because [statement]
-    # e.g. "because I said so"
     (
         r"because (.*)",
         (
@@ -204,7 +153,6 @@ responses = (
             "If %1, what else must be true?",
         ),
     ),
-    # yes or no - raise an issue of certainty/correctness
     (
         r"(yes)|(no)",
         (
@@ -212,7 +160,6 @@ responses = (
             "It is better to be right than to be certain.",
         ),
     ),
-    # sentence containing word 'love'
     (
         r"(.*)love(.*)",
         (
@@ -220,7 +167,6 @@ responses = (
             "Free love!",
         ),
     ),
-    # sentence containing word 'understand' - r
     (
         r"(.*)understand(.*)",
         (
@@ -229,8 +175,6 @@ responses = (
             "Imagination is more important than knowledge.",
         ),
     ),
-    # 'I', 'me', 'my' - person is talking about themself.
-    # this breaks down when words contain these - eg 'Thyme', 'Irish'
     (
         r"(.*)(me )|( me)|(my)|(mine)|(i)(.*)",
         (
@@ -240,13 +184,10 @@ responses = (
             "Think not just of yourself, but of others.",
         ),
     ),
-    # 'you' starting a sentence
-    # e.g. "you stink!"
     (
         r"you (.*)",
         ("My path is not of concern to you.", "I am but one, and you but one more."),
     ),
-    # say goodbye with some extra Zen wisdom.
     (
         r"exit",
         (
@@ -256,9 +197,6 @@ responses = (
             "\nThe trick is knowning how to tip ourselves over and let the beautiful stuff out.",
         ),
     ),
-    # fall through case -
-    # when stumped, respond with generic zen wisdom
-    #
     (
         r"(.*)",
         (
@@ -304,14 +242,15 @@ window = Tk()
 window.title("zen chatbot")
 window.geometry("800x680")
 window.resizable(0, 0)
-window.config(bg="white")
+window.config(bg="#0F0F0F")
 
 principalWindow = Frame()
+principalWindow.config(bg="#0F0F0F")
 title = Label(principalWindow, text="Welcome to zen chatbot\nSay Hello to the chatbot")
-title.config(font=("Courier", 18))
+title.config(font=("Raleway", 18), bg="#0F0F0F", fg="#008170")
 title.grid(row=0, column=0, padx=10, pady=10)
 
-textArea = Text(principalWindow, width=90, height=30)
+textArea = Text(principalWindow, font=("Raleway", 10),width=90, height=30, bg="#008170", fg="#0F0F0F")
 textArea.grid(row=1, column=0, padx=10, pady=10)
 scroll = Scrollbar(principalWindow, command=textArea.yview())
 scroll.grid(row=1, column=1, sticky="nsew")
